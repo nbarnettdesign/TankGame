@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FocusPoint : MonoBehaviour
 {
+    // Created By Liam Gates
     public float HalfX = 20f;
     public float HalfY = 15f;
     public float HalfZ = 15f;

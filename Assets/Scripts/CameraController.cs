@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    // Created By Liam Gates
+
     public FocusPoint FocusPoint;
-    public List<GameObject> players;
+    public List<TankController> players;
 
     // Update Speeds for depth, angle and position
     public float depthUpdateSpeed = 10f;
@@ -26,7 +28,7 @@ public class CameraController : MonoBehaviour
     //private float cameraEulerX;
     //private Vector3 CameraPosition;
 
-    public List<GameObject> camerTrackedObjects = new List<GameObject>();
+    //public List<GameObject> camerTrackedObjects = new List<GameObject>();
 
     private Camera cameraComponent;
 
@@ -45,8 +47,14 @@ public class CameraController : MonoBehaviour
     {
         //adds FocusePoint to the player list so it's position is taken into acount when calculations are done 
         //players.Add(FocusPoint.gameObject);
+        //players = (MatchManager._pInstance._AliveTanks);
 
         cameraComponent = transform.GetChild(0).GetComponent<Camera>();
+    }
+
+    void Update()
+    {
+        players = (MatchManager._pInstance._AliveTanks);
     }
 
     void LateUpdate()
@@ -97,7 +105,7 @@ public class CameraController : MonoBehaviour
 
 
         Bounds b = new Bounds();
-        foreach(GameObject go in players)
+        foreach(TankController go in players)
         {
             Renderer renderer = go.GetComponent<Renderer>();
             if (renderer)
