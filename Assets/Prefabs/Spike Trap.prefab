@@ -242,5 +242,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7760d62a8d05b2d41918b05507f59ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpickDamage: 1
+  SpickDamage: 0.1
   _ImpactEffect: {fileID: 0}
