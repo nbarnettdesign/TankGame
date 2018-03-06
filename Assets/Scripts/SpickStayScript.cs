@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpickStayScript : MonoBehaviour
 {
-    public float SpickDamage = 1f;
+    public float SpickDamage = 0.1f;
     public ParticleSystem _ImpactEffect;
 
     private void OnTriggerStay(Collider other)
