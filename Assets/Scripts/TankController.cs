@@ -98,7 +98,7 @@ public class TankController : MonoBehaviour {
         if (_Health.CheckAlive() && !MatchManager._pInstance.GetGamePaused() && !MatchManager._pInstance.GetGameOver()) {
 
             // Update cannon rotation
-             _CannonLook = new Vector3(0, 0f + (Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 0);
+             _CannonLook = new Vector3((Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 0, 0);
             if (_Cannon) _Cannon.transform.Rotate(_CannonLook.normalized * _CannonRotationSpeed);
 
             // Update base rotation
@@ -381,6 +381,20 @@ public class TankController : MonoBehaviour {
 
         // Remove life from life count
         LivesRemaining -= 1;
+
+        // Need to create the next tank prior to destroying the current one
+        GameObject newTank = Instantiate(this.gameObject);
+        newTank.transform.position = new Vector3(1000, 1, 1000);
+
+        // Update new lives
+        newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
+
+        // Move tank to spawn point
+        newTank.transform.position = _SpawnPoint.position;
+        newTank.transform.rotation = _SpawnPoint.rotation;
+
+        // Destroy old tank (current one)
+        Destroy(this.gameObject);
     }
 
 }
