@@ -461,7 +461,7 @@ public class TankController : MonoBehaviour {
 
             // Remove life from life count
             LivesRemaining -= 1;
-            MatchManager._pInstance._Players[(int)_PlayerIndex].Lives = LivesRemaining;
+            ///MatchManager._pInstance._Players[(int)_PlayerIndex].Lives = LivesRemaining;
 
             // Need to create the next tank prior to destroying the current one
             GameObject newTank = Instantiate(gameObject);
