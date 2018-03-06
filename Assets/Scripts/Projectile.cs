@@ -93,21 +93,31 @@ public class Projectile : MonoBehaviour {
         }
 
         // Check for valid damagable object
-        if (collision.gameObject.tag == "Destroyable" && _Reflects && _BounceCount > 0) {
+        if (collision.gameObject.tag == "Destroyable") {
+            
 
             // If not our owner that the projectile is colliding against
             TankController tank = collision.gameObject.GetComponent<TankController>();
+            if (tank != _Owner) {
 
-            // Not colliding with owner & the tank has no active shield currently
-            if (tank != _Owner && !tank.GetShieldActive()) {
-                
-                // Get reference to the damagable component
-                Health obj = collision.gameObject.GetComponent<Health>();
-                obj.Damage(_Damage);
+                if (_Reflects && _BounceCount > 0) {
 
-                // Play impact effect
-                if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
-                Destroy(gameObject);
+                    // Reflect velocity based off contact point
+                    ContactPoint contact = collision.contacts[0];
+                    _Velocity = Vector3.Reflect(_Velocity, contact.normal);
+
+                    _BounceCount -= 1;
+                }
+                else if (!tank.GetShieldActive()) {
+
+                    // Get reference to the damagable component
+                    Health obj = collision.gameObject.GetComponent<Health>();
+                    obj.Damage(_Damage);
+
+                    // Play impact effect
+                    if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
+                    Destroy(gameObject);
+                }               
             }
         }
 
