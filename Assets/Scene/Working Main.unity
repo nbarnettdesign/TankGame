@@ -414,6 +414,16 @@ Prefab:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
+        type: 2}
+      propertyPath: _BulletPrefab
+      value: 
+      objectReference: {fileID: 966539448}
+    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
+        type: 2}
+      propertyPath: _PlayerIndex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
   m_IsPrefabParent: 0
@@ -1259,20 +1269,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 19
       objectReference: {fileID: 0}
-    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: _ShellPrefab
-      value: 
-      objectReference: {fileID: 897548994}
     - target: {fileID: 1592697660285496, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
       propertyPath: m_Name
       value: Final_Tank 1
       objectReference: {fileID: 0}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
-      propertyPath: _PlayerIndex
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: _ShellPrefab
+      value: 
+      objectReference: {fileID: 897548994}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
       propertyPath: _BulletPrefab
@@ -1283,10 +1288,6 @@ Prefab:
       propertyPath: _SpawnPoint
       value: 
       objectReference: {fileID: 2088094124}
-    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_TagString
-      value: TankCannonOne
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
   m_IsPrefabParent: 0
@@ -1999,38 +2000,6 @@ Prefab:
       propertyPath: m_Name
       value: Final_Tank 4
       objectReference: {fileID: 0}
-    - target: {fileID: 143357916252734566, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 143357916252734566, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: m_Height
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: _MuzzleLaunchPoint
-      value: 
-      objectReference: {fileID: 1228449651}
-    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: _PlayerIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_TagString
-      value: TankCannonFour
-      objectReference: {fileID: 0}
-    - target: {fileID: 4102221797369126, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4960254768153130, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
       propertyPath: _ShellPrefab
@@ -2046,37 +2015,19 @@ Prefab:
       propertyPath: _SpawnPoint
       value: 
       objectReference: {fileID: 1767605576}
+    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
+      propertyPath: m_TagString
+      value: TankCannonFour
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1228449649 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1592697660285496, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1228449648}
 --- !u!114 &1228449650 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
     type: 2}
   m_PrefabInternal: {fileID: 1228449648}
   m_Script: {fileID: 11500000, guid: 9f7d81a101698044a8127fec9b196a40, type: 3}
---- !u!1 &1228449651 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1805824358497080, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1228449648}
---- !u!65 &1228449652
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1228449649}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 0.5, z: 1.25}
-  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!1 &1323731049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,23 +2201,6 @@ Transform:
   m_Father: {fileID: 1323731050}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
---- !u!1 &1450156377 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1592697660285496, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1705373706}
---- !u!65 &1450156378
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1450156377}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 0.5, z: 1.25}
-  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!114 &1450156380 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
@@ -2525,11 +2459,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -44.452003}
---- !u!1 &1584643406 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1805824358497080, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1705373706}
 --- !u!1 &1593648534
 GameObject:
   m_ObjectHideFlags: 0
@@ -2896,38 +2825,11 @@ Prefab:
       propertyPath: m_Name
       value: Final_Tank 2
       objectReference: {fileID: 0}
-    - target: {fileID: 143357916252734566, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 143357916252734566, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: m_Height
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
-      propertyPath: _MuzzleLaunchPoint
+      propertyPath: _ShellPrefab
       value: 
-      objectReference: {fileID: 1584643406}
-    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: _PlayerIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_TagString
-      value: TankCannonTwo
-      objectReference: {fileID: 0}
-    - target: {fileID: 4102221797369126, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4960254768153130, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 897548994}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
       propertyPath: _BulletPrefab
@@ -2935,9 +2837,13 @@ Prefab:
       objectReference: {fileID: 966539448}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
-      propertyPath: _ShellPrefab
+      propertyPath: _SpawnPoint
       value: 
-      objectReference: {fileID: 897548994}
+      objectReference: {fileID: 1029006136}
+    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
+      propertyPath: m_TagString
+      value: TankCannonTwo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
   m_IsPrefabParent: 0
@@ -3264,43 +3170,11 @@ Prefab:
       propertyPath: m_Name
       value: Final_Tank 3
       objectReference: {fileID: 0}
-    - target: {fileID: 143357916252734566, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 143357916252734566, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: m_Height
-      value: 0.75
-      objectReference: {fileID: 0}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
-      propertyPath: _MuzzleLaunchPoint
+      propertyPath: _ShellPrefab
       value: 
-      objectReference: {fileID: 1904614653}
-    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: _PlayerIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_TagString
-      value: TankCannonThree
-      objectReference: {fileID: 0}
-    - target: {fileID: 4102221797369126, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4960254768153130, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-        type: 2}
-      propertyPath: _SpawnPoint
-      value: 
-      objectReference: {fileID: 836391260}
+      objectReference: {fileID: 897548994}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
       propertyPath: _BulletPrefab
@@ -3308,40 +3182,22 @@ Prefab:
       objectReference: {fileID: 966539448}
     - target: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
         type: 2}
-      propertyPath: _ShellPrefab
+      propertyPath: _SpawnPoint
       value: 
-      objectReference: {fileID: 897548994}
+      objectReference: {fileID: 836391260}
+    - target: {fileID: 1374822145411742, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
+      propertyPath: m_TagString
+      value: TankCannonThree
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1904614651 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1592697660285496, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1904614650}
 --- !u!114 &1904614652 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114238488672420888, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
     type: 2}
   m_PrefabInternal: {fileID: 1904614650}
   m_Script: {fileID: 11500000, guid: 9f7d81a101698044a8127fec9b196a40, type: 3}
---- !u!1 &1904614653 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1805824358497080, guid: 11b0f6fe59c0cdf4dbbfead3d8f8537a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1904614650}
---- !u!65 &1904614654
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1904614651}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 0.5, z: 1.25}
-  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!1 &1987178197
 GameObject:
   m_ObjectHideFlags: 0

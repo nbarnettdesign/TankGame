@@ -103,7 +103,7 @@ public class MatchManager : MonoBehaviour {
             tank._PlayerIndex = (XInputDotNetPure.PlayerIndex)i;
 
             // Set cannon tag (for controller rotation)
-            tank.transform.GetChild(1).tag = string.Concat("TankCannon" + tank._PlayerIndex.ToString());
+            tank.transform.GetChild(2).tag = string.Concat("TankCannon" + tank._PlayerIndex.ToString());
 
             // Set respawn point
             tank._SpawnPoint = _SpawnTransforms[i];

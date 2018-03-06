@@ -41,7 +41,17 @@ public class Projectile : MonoBehaviour {
 
     // Colliding with kinematic objects
     public void OnCollisionEnter(Collision collision) {
-        
+
+        // Check for collision with a shield
+        if (collision.gameObject) {
+
+            if (collision.gameObject.tag == "Shield") {
+
+                // Play impact effect
+                if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
+                Destroy(gameObject);
+            }
+        }
         // Check for valid damagable object
         if (collision.gameObject.tag == "Destroyable") {
 
