@@ -48,7 +48,8 @@ public class Projectile : MonoBehaviour {
             // If not our owner that the projectile is colliding against
             TankController tank = collision.gameObject.GetComponent<TankController>();
             
-            if (tank != _Owner) {
+            // Not colliding with owner & the tank has no active shield currently
+            if (tank != _Owner && !tank.GetShieldActive()) {
 
                 // Get reference to the damagable component
                 Health obj = collision.gameObject.GetComponent<Health>();
