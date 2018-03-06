@@ -3545,7 +3545,7 @@ MonoBehaviour:
   _MaxReverseMovementSpeed: -5
   _DamageSemiAutoShell: 15
   _DamageFullAutoBullet: 5
-  _DamageLaserBeam: 1
+  _DamageLaserBeam: 0.1
   _FiringDelaySemiAutoShell: 0.5
   _FiringDelayFullAutoBullet: 0.1
   _FiringDelayLaserCharge: 2
