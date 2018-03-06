@@ -134,6 +134,9 @@ public class TankController : MonoBehaviour {
 
             // Update controller movement
             _CharacterController.Move(transform.forward * _CurrentSpeed * Time.deltaTime);
+
+            // Lock Y axis
+            transform.position = new Vector3(transform.position.x, -0.5f, transform.position.z);
             
             // Check for action input
             CheckFire();
