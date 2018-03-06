@@ -54,9 +54,12 @@ GameObject:
   - component: {fileID: 4329592106303546}
   - component: {fileID: 33765286890190460}
   - component: {fileID: 23955488550432492}
+  - component: {fileID: 54268658343016576}
+  - component: {fileID: 65151722798357566}
+  - component: {fileID: 114798553196227452}
   m_Layer: 0
   m_Name: Spike
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1040026092883730}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.72, y: 0.26, z: -1.7483001}
+  m_LocalPosition: {x: 12.923, y: 0.27, z: 1.6556556}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4787998510635904}
@@ -184,6 +187,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1907833545821688}
   m_Mesh: {fileID: 4300002, guid: d15bc707d2c060e49b3a6f7b1f30f9ba, type: 3}
+--- !u!54 &54268658343016576
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907833545821688}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &65151722798357566
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907833545821688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.90638506, y: 0.6260129, z: 0.7589079}
+  m_Center: {x: -0.533075, y: 0.31300646, z: 0.48710042}
 --- !u!95 &95729294202893304
 Animator:
   serializedVersion: 3
@@ -201,3 +231,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114798553196227452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907833545821688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7760d62a8d05b2d41918b05507f59ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpickDamage: 1
+  _ImpactEffect: {fileID: 0}

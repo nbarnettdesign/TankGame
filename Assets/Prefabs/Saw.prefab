@@ -106,6 +106,8 @@ GameObject:
   - component: {fileID: 4115560778915438}
   - component: {fileID: 33076221163350184}
   - component: {fileID: 23375484440990546}
+  - component: {fileID: 135532761505852174}
+  - component: {fileID: 114396033215929564}
   m_Layer: 0
   m_Name: Mesh_Saw1
   m_TagString: Untagged
@@ -161,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060836573228332}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071065, w: 0.7071072}
-  m_LocalPosition: {x: 6.26, y: 0.54, z: -1.08}
+  m_LocalPosition: {x: 10.94, y: 0.55, z: 4.48}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4901917563610478}
@@ -435,3 +437,28 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114396033215929564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889289330226718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7760d62a8d05b2d41918b05507f59ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpickDamage: 5
+  _ImpactEffect: {fileID: 0}
+--- !u!135 &135532761505852174
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1889289330226718}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.031071095
+  m_Center: {x: 2.1175824e-22, y: 0.000000003725291, z: -0.0000000055879354}

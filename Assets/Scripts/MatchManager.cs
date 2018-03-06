@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MatchManager : MonoBehaviour {
 
     // Created by Daniel Marton
+
+    [Header("Players")]
+    public List<Player> _Players;
 
     [Header("Health")]
     public int _PlayerLives = 3;
@@ -32,6 +36,7 @@ public class MatchManager : MonoBehaviour {
     public float _SpeedBoostModifier = 1.5f;
     public float _SpeedBoostTime = 5f;
     public float _ShieldTime = 4f;
+    public int _MinigunMagazineSize = 20;
 
     [Header("Match")]
     public List<TankController> _AliveTanks;
@@ -45,6 +50,10 @@ public class MatchManager : MonoBehaviour {
     public int _GameTime = 0;
     [HideInInspector]
     public static MatchManager _pInstance;
+    [HideInInspector]
+    public Player Winner;
+    [HideInInspector]
+    public AsyncOperation Async { get; private set; }
 
     private void Awake() {
 
@@ -84,6 +93,10 @@ public class MatchManager : MonoBehaviour {
 
     public void Restart() {
 
+        Async = SceneManager.LoadSceneAsync(1);
+        Async.allowSceneActivation = true;
+
+        /*
         // Destroy any excess tanks
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Destroyable");
 
@@ -110,5 +123,9 @@ public class MatchManager : MonoBehaviour {
             _NewTank.SetActive(false);
         }
 
+        foreach (var plyr in _Players) {
+
+            plyr.Lives = _PlayerLives;
+        }*/
     }
 }
