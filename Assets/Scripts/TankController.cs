@@ -153,7 +153,7 @@ public class TankController : MonoBehaviour {
             // Check for action input
             CheckFire();
             ActivateShieldCheck();
-            ///ChangeFireMode(); /// temporary for debugging purposes
+            ChangeFireMode(); /// temporary for debugging purposes
 
             // Update time alive
             TimeAlive = MatchManager._pInstance._GameTime;
@@ -382,11 +382,19 @@ public class TankController : MonoBehaviour {
                 // Fire raycast to simulate laser beam collisions
                 float raycastDistance = 1000f;
                 RaycastHit raycastHit;
-                Physics.Raycast(_MuzzleLaunchPoint.transform.position, _Cannon.transform.forward, out raycastHit, raycastDistance);
+                Physics.Raycast(_MuzzleLaunchPoint.transform.position, _MuzzleLaunchPoint.transform.forward, out raycastHit, raycastDistance);
 
                 // Debug raycast
-                if (raycastHit.transform) { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, raycastHit.transform.position, Color.green); }
-                else { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, _Cannon.transform.forward * raycastDistance, Color.red); }
+                if (raycastHit.transform) {
+
+                    if (raycastHit.collider.gameObject.tag == "Destroyable") {
+
+                        // Damage object
+                        raycastHit.collider.gameObject.GetComponent<Health>().Damage(MatchManager._pInstance._DamageLaserBeam);
+                    }
+                    Debug.DrawLine(_MuzzleLaunchPoint.transform.position, raycastHit.transform.position, Color.green);
+                }
+                else { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, _MuzzleLaunchPoint.transform.forward * raycastDistance, Color.red); }
 
                 // On successful hit with a damageable object
                 if (raycastHit.collider) {
@@ -404,8 +412,10 @@ public class TankController : MonoBehaviour {
 
                 // Controller rumble
                 ControllerRumble(true, 1f, 1f);
-                _RumbleTime = 0.1f;
+                _RumbleTime = 0.5f;
             }
+
+            // Completed charge firing sequence
             else if (_ChargeFiringAmount >= _ChargeFiringTime) {
 
                 ControllerRumble(false, 0f, 0f);
@@ -413,6 +423,7 @@ public class TankController : MonoBehaviour {
                 _ChargeAmount = 0f;
                 _Firemode = EFiremode.SemiAuto;
                 _MagazineSize = 1;
+                _CanTryToFire = false;
             }
         }
     }
