@@ -9,6 +9,8 @@ TagManager:
   - TankCannonTwo
   - TankCannonThree
   - TankCannonFour
+  - Shell
+  - Bullet
   layers:
   - Default
   - TransparentFX
