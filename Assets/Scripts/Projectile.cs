@@ -99,16 +99,8 @@ public class Projectile : MonoBehaviour {
             // If not our owner that the projectile is colliding against
             TankController tank = collision.gameObject.GetComponent<TankController>();
             if (tank != _Owner) {
-
-                if (_Reflects && _BounceCount > 0) {
-
-                    // Reflect velocity based off contact point
-                    ContactPoint contact = collision.contacts[0];
-                    _Velocity = Vector3.Reflect(_Velocity, contact.normal);
-
-                    _BounceCount -= 1;
-                }
-                else if (!tank.GetShieldActive()) {
+                
+                if (!tank.GetShieldActive()) {
 
                     // Get reference to the damagable component
                     Health obj = collision.gameObject.GetComponent<Health>();
@@ -172,3 +164,5 @@ public class Projectile : MonoBehaviour {
 
     public bool GetMoving() { return _Moving; }
 }
+
+
