@@ -58,6 +58,7 @@ public class Pickup : MonoBehaviour {
 
                                 // Minigun
                                 tank.SetFiremode(TankController.EFiremode.FullAuto);
+                                tank.SetMagazine(MatchManager._pInstance._MinigunMagazineSize);
                                 break;
                             }
 

@@ -108,8 +108,8 @@ public class TankController : MonoBehaviour {
         if (_Health.CheckAlive() && !MatchManager._pInstance.GetGamePaused() && !MatchManager._pInstance.GetGameOver()) {
 
             // Update cannon rotation
-             _CannonLook = new Vector3((Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 0, 0);
-            if (_Cannon) _Cannon.transform.Rotate(_CannonLook.normalized * _CannonRotationSpeed);
+             _CannonLook = new Vector3(0, (Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 90);
+            if (_Cannon) _Cannon.transform.Rotate(_CannonLook * _CannonRotationSpeed);
             else { _Cannon = GameObject.FindGameObjectWithTag("TankCannon" + _PlayerIndex.ToString()); }
 
             // Update base rotation
@@ -152,7 +152,7 @@ public class TankController : MonoBehaviour {
             // Check for action input
             CheckFire();
             ActivateShieldCheck();
-            ChangeFireMode(); /// temporary for debugging purposes
+            ///ChangeFireMode(); /// temporary for debugging purposes
 
             // Update time alive
             TimeAlive = MatchManager._pInstance._GameTime;
@@ -177,7 +177,7 @@ public class TankController : MonoBehaviour {
             if (_ShieldActive) { _Shield.SetActive(true); }
             else { _Shield.SetActive(false); }
         }
-        else /* (!_Health.CheckAlive()) */ { KillTank(); }
+        else /* (!_Health.CheckAlive()) */ { _Health._Health = 0; KillTank(); }
 
         // Update firing delay
         if (_FireDelay > 0) { _FireDelay -= Time.deltaTime; }
@@ -435,7 +435,7 @@ public class TankController : MonoBehaviour {
             _Firemode += 1;
             if (_Firemode == EFiremode.Count) { _Firemode = 0; _MagazineSize = 1; }
 
-            if (_Firemode == EFiremode.FullAuto) { _MagazineSize = 20; }
+            if (_Firemode == EFiremode.FullAuto) { _MagazineSize = MatchManager._pInstance._MinigunMagazineSize; }
         }
 
         if (_PreviousGamepadState.Buttons.B == ButtonState.Released && _GamepadState.Buttons.B == ButtonState.Pressed) {
@@ -460,6 +460,7 @@ public class TankController : MonoBehaviour {
 
             // Remove life from life count
             LivesRemaining -= 1;
+            MatchManager._pInstance._Players[(int)_PlayerIndex].Lives = LivesRemaining;
 
             // Need to create the next tank prior to destroying the current one
             GameObject newTank = Instantiate(gameObject);
@@ -489,4 +490,6 @@ public class TankController : MonoBehaviour {
     public void SetFiremode(EFiremode firemode) { _Firemode = firemode; }
 
     public bool GetShieldActive() { return _ShieldActive; }
+
+    public void SetMagazine(int size) { _MagazineSize = size; }
 }
