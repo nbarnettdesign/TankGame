@@ -19,9 +19,9 @@ public class MatchManager : MonoBehaviour {
     public float _MaxReverseMovementSpeed = -5f;
 
     [Header("Weapon")]
-    public int _DamageSemiAutoShell = 15;
-    public int _DamageFullAutoBullet = 5;
-    public int _DamageLaserBeam = 1;
+    public float _DamageSemiAutoShell = 15f;
+    public float _DamageFullAutoBullet = 5f;
+    public float _DamageLaserBeam = 0.1f;
     public float _FiringDelaySemiAutoShell = 0.5f;
     public float _FiringDelayFullAutoBullet = 0.1f;
     public float _FiringDelayLaserCharge = 2f;

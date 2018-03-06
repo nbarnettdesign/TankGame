@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour {
     public bool _Enabled = false;
 
     private TankController _Owner;
-    private int _Damage = 20;
+    private float _Damage = 20f;
     private float _DistanceTravelled = 0f;
     private float _MaxDistance = 10f;
     private bool _Moving = false;
@@ -85,7 +85,7 @@ public class Projectile : MonoBehaviour {
 
     public void SetOwner(TankController owner) { _Owner = owner; }
 
-    public void SetDamage(int damage) { _Damage = damage; }
+    public void SetDamage(float damage) { _Damage = damage; }
 
     public bool GetMoving() { return _Moving; }
 

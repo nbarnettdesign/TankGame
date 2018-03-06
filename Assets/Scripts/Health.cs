@@ -8,7 +8,7 @@ public class Health : MonoBehaviour {
 
     // Health
     public enum EState { Okay, Damaged, Destroyed }
-    public int _Health = 100;
+    public float _Health = 100;
     public MeshFilter _Mesh;
     public Mesh _DestroyedMesh;
     
@@ -54,8 +54,8 @@ public class Health : MonoBehaviour {
 
     public bool CheckAlive() { return _IsAlive = _Health > 0; }
 
-    public void Damage(int damage) { _Health -= damage; }
+    public void Damage(float damage) { _Health -= damage; }
 
-    public int GetHealth() { return _Health; }
+    public float GetHealth() { return _Health; }
 
 }
