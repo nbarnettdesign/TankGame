@@ -52,9 +52,16 @@ public class CameraController : MonoBehaviour
         cameraComponent = transform.GetChild(0).GetComponent<Camera>();
     }
 
+
+
     void Update()
     {
         players = (MatchManager._pInstance._AliveTanks);
+
+        // Lock z axis
+      //  cameraComponent.transform.rotation = new Quaternion(cameraComponent.transform.position.x, 0.0f, 0.0f, 0.0f);
+       // cameraComponent.transform.rotation = new Quaternion(cameraComponent.transform.eulerAngles.x, 0.0f,
+         //                                               cameraComponent.transform.eulerAngles.z, 0.0f);
     }
 
     void LateUpdate()
@@ -121,7 +128,21 @@ public class CameraController : MonoBehaviour
 
 
         cameraComponent.transform.LookAt(midPoint);
-        Vector3 offset = FocusPoint.FocusBounds.center - transform.position;
+        //Vector3 offset = FocusPoint.FocusBounds.center - transform.position;
+        float sumX = 0f;
+        float sumY = 0f;
+        float averageX = 0f;
+        float averageY = 0f;
+
+        foreach (var item in players)
+        {
+            sumX += item.gameObject.transform.position.x;
+            sumY += item.gameObject.transform.position.z;
+        }
+        averageX = sumX / players.Count; // divide by 4 because 4 tanks
+        averageY = sumY / players.Count;
+
+        Vector3 offset = new Vector3(averageX, 0, averageY);
         if (!canSeeAllPlayers)
         {
             if(offset.magnitude < depthMax && lastDirectionMoved != CamerDirection.Forward)
@@ -138,6 +159,8 @@ public class CameraController : MonoBehaviour
                 lastDirectionMoved = CamerDirection.Forward;
             }
         }
+
+        
 
         //Vector3 localEulerAngles = gameObject.transform.localEulerAngles;
         //if (localEulerAngles.x != cameraEulerX)
