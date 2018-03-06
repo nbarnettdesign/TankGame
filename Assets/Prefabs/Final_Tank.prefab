@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23474772744453638}
   m_Layer: 0
   m_Name: Cannon
-  m_TagString: TankCannonOne
+  m_TagString: TankCannonTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,7 +87,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1592697660285496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
+=======
+  m_LocalPosition: {x: -7.38, y: -0.5, z: 5.252}
+>>>>>>> 731722ffabefe507a58bfa6f746de3535a764e69
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4638621886334358}
@@ -149,8 +153,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 79e7686dd72397447979b1c5e982793f, type: 2}
-  - {fileID: 2100000, guid: 79e7686dd72397447979b1c5e982793f, type: 2}
+  - {fileID: 2100000, guid: 26da53af9159b8a4fa186a64063d9103, type: 2}
+  - {fileID: 2100000, guid: 26da53af9159b8a4fa186a64063d9103, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,7 +188,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 79e7686dd72397447979b1c5e982793f, type: 2}
+  - {fileID: 2100000, guid: 26da53af9159b8a4fa186a64063d9103, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -258,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7d81a101698044a8127fec9b196a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PlayerIndex: 0
+  _PlayerIndex: 1
   _ShellPrefab: {fileID: 0}
   _BulletPrefab: {fileID: 0}
   _MuzzleLaunchPoint: {fileID: 1805824358497080}
