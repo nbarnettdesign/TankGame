@@ -337,8 +337,8 @@ public class TankController : MonoBehaviour {
                 Physics.Raycast(_MuzzleLaunchPoint.transform.position, _Cannon.transform.forward, out raycastHit, raycastDistance);
 
                 // Debug raycast
-                if (raycastHit.transform) { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, raycastHit.transform.position); }
-                else { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, _Cannon.transform.forward * raycastDistance); }
+                if (raycastHit.transform) { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, raycastHit.transform.position, Color.green); }
+                else { Debug.DrawLine(_MuzzleLaunchPoint.transform.position, _Cannon.transform.forward * raycastDistance, Color.red); }
 
                 // On successful hit with a damageable object
                 if (raycastHit.collider) {
