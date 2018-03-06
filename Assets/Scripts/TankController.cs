@@ -47,7 +47,6 @@ public class TankController : MonoBehaviour {
     private float _FireDelay = 0f;
     private float _FiringDelaySemiAuto = 0.5f;
     private float _FiringDelayFullAuto = 0.1f;
-    private float _FiringDelayCharge = 1f;
     private float _ChargeAmount = 0f;
     private float _ChargeTime = 2f;
     private bool _IsChargeFiring = false;
@@ -202,7 +201,6 @@ public class TankController : MonoBehaviour {
         _CannonRotationSpeed = MatchManager._pInstance._CannonRotationSpeed;
         _FiringDelaySemiAuto = MatchManager._pInstance._FiringDelaySemiAutoShell;
         _FiringDelayFullAuto = MatchManager._pInstance._FiringDelayFullAutoBullet;
-        _FiringDelayCharge = MatchManager._pInstance._FiringDelayLaserCharge;
         _ChargeTime = MatchManager._pInstance._LaserChargeUpTime;
         _ChargeFiringTime = MatchManager._pInstance._LaserFiringTime;
     }
@@ -327,7 +325,7 @@ public class TankController : MonoBehaviour {
 
                     // Set controller rumble properties
                     rumbleLeft = 0.7f; rumbleRight = 0.7f;
-                    _RumbleTime = 0.5f;
+                    _RumbleTime = 0.2f;
                 }
                 break;
             }

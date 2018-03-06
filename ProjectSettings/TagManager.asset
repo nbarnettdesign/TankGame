@@ -14,6 +14,7 @@ TagManager:
   - TankCannon
   - TankBase
   - Shield
+  - Wall
   layers:
   - Default
   - TransparentFX
