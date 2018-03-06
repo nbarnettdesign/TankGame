@@ -10,21 +10,28 @@ public class Projectile : MonoBehaviour {
     private TankController _Owner;
     private int _Damage = 20;
     private float _DistanceTravelled = 0f;
-    private float _MaxDistance = 1000f;
+    private float _MaxDistance = 10f;
+    private bool _Moving = false;
+    private Quaternion _Rotation;
 
-    void Start() {
+    public void Start() {
 
-
+        _Rotation = transform.rotation;
     }
 
     void Update() {
 
         // Constantly move forward
+        transform.rotation = _Rotation;
         transform.position += transform.forward * _MovementSpeed * Time.deltaTime;
+        _Moving = true;
 
         // Destroy gameObject when it has reached max distance threshold
         if (_DistanceTravelled < _MaxDistance) _DistanceTravelled += Time.deltaTime;
-        else Destroy(gameObject);
+        else {
+            Destroy(gameObject);
+            Debug.Log("destroy projectile");
+        }
     }
 
     // Colliding with kinematic objects
@@ -45,6 +52,7 @@ public class Projectile : MonoBehaviour {
 
                 // Play impact effect
                 if (_ImpactEffect) {
+
                     //Instantiate(_ImpactEffect, transform.position)
                 }
                 Destroy(gameObject);
@@ -65,4 +73,8 @@ public class Projectile : MonoBehaviour {
     public void SetOwner(TankController owner) { _Owner = owner; }
 
     public void SetDamage(int damage) { _Damage = damage; }
+
+    public bool GetMoving() { return _Moving; }
+
+    public void SetRotation(Quaternion rotation) { _Rotation = rotation; }
 }
