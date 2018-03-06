@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
+    // Created by Daniel Marton
+
     public float _MovementSpeed = 5f;
     public ParticleSystem _ImpactEffect;
+
+    [HideInInspector]
+    public bool _Enabled = false;
 
     private TankController _Owner;
     private int _Damage = 20;
@@ -21,16 +26,16 @@ public class Projectile : MonoBehaviour {
 
     void Update() {
 
-        // Constantly move forward
-        transform.rotation = _Rotation;
-        transform.position += transform.forward * _MovementSpeed * Time.deltaTime;
-        _Moving = true;
+        if (_Enabled) {
 
-        // Destroy gameObject when it has reached max distance threshold
-        if (_DistanceTravelled < _MaxDistance) _DistanceTravelled += Time.deltaTime;
-        else {
-            Destroy(gameObject);
-            Debug.Log("destroy projectile");
+            // Constantly move forward
+            transform.rotation = _Rotation;
+            transform.position += transform.forward * _MovementSpeed * Time.deltaTime;
+            _Moving = true;
+
+            // Destroy gameObject when it has reached max distance threshold
+            if (_DistanceTravelled < _MaxDistance) _DistanceTravelled += Time.deltaTime;
+            else { Destroy(gameObject); }
         }
     }
 
@@ -51,10 +56,7 @@ public class Projectile : MonoBehaviour {
                 obj.Damage(_Damage);
 
                 // Play impact effect
-                if (_ImpactEffect) {
-
-                    //Instantiate(_ImpactEffect, transform.position)
-                }
+                if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
                 Destroy(gameObject);
             }
         }

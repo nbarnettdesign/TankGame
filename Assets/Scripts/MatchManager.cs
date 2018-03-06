@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MatchManager : MonoBehaviour {
 
+    // Created by Daniel Marton
+
     [Header("Health")]
     public int _PlayerLives = 3;
     public int _TankStartingHealth = 100;
@@ -39,8 +41,6 @@ public class MatchManager : MonoBehaviour {
     public int _GameTime = 0;
     [HideInInspector]
     public static MatchManager _pInstance;
-
-
 
     private void Awake() {
 

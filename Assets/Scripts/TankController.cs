@@ -5,6 +5,8 @@ using XInputDotNetPure;
 
 public class TankController : MonoBehaviour {
 
+    // Created by Daniel Marton
+
     // Gamepad
     public PlayerIndex _PlayerIndex;
     private GamePadState _GamepadState;
@@ -48,6 +50,8 @@ public class TankController : MonoBehaviour {
     private bool _IsChargeFiring = false;
     private float _ChargeFiringAmount = 0f;
     private float _ChargeFiringTime = 2f;
+    private int _MagazineSize = 1;
+    private bool _BeenDestroyed = false;
 
     // Stats
     [HideInInspector]
@@ -86,7 +90,7 @@ public class TankController : MonoBehaviour {
     }
 
     private void Update () {
-
+        
         // Update defaults
         UpdateDefaults();
 
@@ -100,6 +104,7 @@ public class TankController : MonoBehaviour {
             // Update cannon rotation
              _CannonLook = new Vector3((Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 0, 0);
             if (_Cannon) _Cannon.transform.Rotate(_CannonLook.normalized * _CannonRotationSpeed);
+            else { _Cannon = GameObject.FindGameObjectWithTag("TankCannon" + _PlayerIndex.ToString()); }
 
             // Update base rotation
             _BaseLookX = _GamepadState.ThumbSticks.Left.X * _BaseRotationSpeed;
@@ -193,19 +198,32 @@ public class TankController : MonoBehaviour {
                 // Semi automatic firing mode
                 case EFiremode.SemiAuto: {
 
-                    _IsFiring = true;
-                    _FireDelay = _FiringDelaySemiAuto;
-                    _CanTryToFire = false;
-                    Fire();
+                    if (_MagazineSize > 0) {
+
+                        _IsFiring = true;
+                        _FireDelay = _FiringDelaySemiAuto;
+                        _CanTryToFire = false;
+                        Fire();
+                    }
                     break;
                 }
 
                 // Fully automatic firing mode
                 case EFiremode.FullAuto: {
 
-                    _IsFiring = true;
-                    _FireDelay = _FiringDelayFullAuto;
-                    Fire();
+                    if (_MagazineSize > 0) {
+
+                        _IsFiring = true;
+                        _FireDelay = _FiringDelayFullAuto;
+                        Fire();
+                    }
+
+                    // Revert back to single shot mode on empty clip
+                    else {
+
+                        _Firemode = EFiremode.SemiAuto;
+                        _MagazineSize = 1;
+                    }
                     break;
                 }
 
@@ -236,8 +254,7 @@ public class TankController : MonoBehaviour {
 
             // On charge up firing mode
             if (_Firemode == EFiremode.Charge && _ChargeAmount >= _ChargeTime && _CanFire) {
-
-                ///_FireDelay = _FiringDelayCharge;
+                
                 Fire();
             }
 
@@ -270,13 +287,15 @@ public class TankController : MonoBehaviour {
                 if (_ShellPrefab && _MuzzleLaunchPoint && _Cannon) {
 
                     obj = Instantiate(_ShellPrefab, _MuzzleLaunchPoint.transform.position, _MuzzleLaunchPoint.transform.rotation);
-                    ///obj.transform.SetPositionAndRotation(_MuzzleLaunchPoint.transform.position, _Cannon.transform.rotation);
 
                     // Set projectile properties
                     Projectile proj;
                     proj = obj.GetComponent<Projectile>();
                     proj.SetOwner(this);
                     proj.SetDamage(MatchManager._pInstance._DamageFullAutoBullet);
+                    proj._Enabled = true;
+
+                    _MagazineSize = 1;
 
                     // Set controller rumble properties
                     rumbleLeft = 0.7f; rumbleRight = 0.7f;
@@ -291,14 +310,16 @@ public class TankController : MonoBehaviour {
                 // Instantiate bullet prefab facing forward based on cannon rotation
                 if (_BulletPrefab && _MuzzleLaunchPoint && _Cannon) {
 
-                    obj = Instantiate(_BulletPrefab, _MuzzleLaunchPoint.transform.position, _Cannon.transform.rotation);
+                    obj = Instantiate(_BulletPrefab, _MuzzleLaunchPoint.transform.position, _MuzzleLaunchPoint.transform.rotation);
 
                     // Set projectile properties
                     Projectile proj;
-                    proj = obj.GetComponent<Projectile>();
-                
+                    proj = obj.GetComponent<Projectile>();                
                     proj.SetOwner(this);
                     proj.SetDamage(MatchManager._pInstance._DamageFullAutoBullet);
+                    proj._Enabled = true;
+
+                    _MagazineSize -= 1;
 
                     // Set controller rumble properties
                     rumbleLeft = 0.35f; rumbleRight = 0.35f;
@@ -320,7 +341,6 @@ public class TankController : MonoBehaviour {
 
         // Start controller rumble
         ControllerRumble(true, rumbleLeft, rumbleRight);
-        Debug.Log("Fire!");
     }
 
     private void LaserBeamFire() {
@@ -361,10 +381,11 @@ public class TankController : MonoBehaviour {
             else if (_ChargeFiringAmount >= _ChargeFiringTime) {
 
                 ControllerRumble(false, 0f, 0f);
-               _ChargeFiringAmount = 0f;
-               _ChargeAmount = 0f;
+                _ChargeFiringAmount = 0f;
+                _ChargeAmount = 0f;
+                _Firemode = EFiremode.SemiAuto;
+                _MagazineSize = 1;
             }
-            Debug.Log(_ChargeAmount);
         }
     }
 
@@ -375,25 +396,36 @@ public class TankController : MonoBehaviour {
 
             // Change firemode
             _Firemode += 1;
-            if (_Firemode == EFiremode.Count) { _Firemode = 0; }
-            Debug.Log(_Firemode);
+            if (_Firemode == EFiremode.Count) { _Firemode = 0; _MagazineSize = 1; }
+
+            if (_Firemode == EFiremode.FullAuto) { _MagazineSize = 20; }
         }
     }
 
     private void KillTank() {
 
-        // Remove life from life count
-        LivesRemaining -= 1;
+        if (!_BeenDestroyed) {
 
-        // Need to create the next tank prior to destroying the current one
-        GameObject newTank = Instantiate(this.gameObject);
+            // Remove life from life count
+            LivesRemaining -= 1;
 
-        // Update new lives
-        newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
+            // Need to create the next tank prior to destroying the current one
+            GameObject newTank = Instantiate(gameObject);
 
-        // Move tank to spawn point
-        newTank.transform.position = _SpawnPoint.position;
-        newTank.transform.rotation = _SpawnPoint.rotation;
+            // Destroy mesh of the old tank
+            Destroy(_Cannon.gameObject);
+
+            // Update stats
+            newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
+            newTank.GetComponent<TankController>()._ShellPrefab = GameObject.FindGameObjectWithTag("Shell");
+            newTank.GetComponent<TankController>()._BulletPrefab = GameObject.FindGameObjectWithTag("Bullet");
+
+            // Move tank to spawn point
+            newTank.transform.position = _SpawnPoint.position;
+            newTank.transform.rotation = _SpawnPoint.rotation;
+
+            _BeenDestroyed = true;
+        }
     }
 
 }
