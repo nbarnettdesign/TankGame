@@ -28,6 +28,11 @@ public class MatchManager : MonoBehaviour {
     public float _LaserChargeUpTime = 2f;
     public float _LaserFiringTime = 3f;
 
+    [Header("Powerups")]
+    public float _SpeedBoostModifier = 1.5f;
+    public float _SpeedBoostTime = 5f;
+    public float _ShieldTime = 4f;
+
     [Header("Match")]
     public List<TankController> _AliveTanks;
     public List<TankController> _EliminatedTanks;
@@ -35,7 +40,6 @@ public class MatchManager : MonoBehaviour {
     private bool _GamePaused = false;
     public Transform[] _SpawnTransforms;
     public GameObject _NewTank;
-
 
     [HideInInspector]
     public int _GameTime = 0;

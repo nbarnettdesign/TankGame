@@ -34,6 +34,8 @@ public class TankController : MonoBehaviour {
     private float _CannonRotationSpeed = 10f;
     private float _Acceleration = 5f;
     private float _Decceleration = 0.5f;
+    private float _SpeedModifier = 1f;
+    private float _SpeedBoostTimer = 0f;
 
     // Weapon controller
     public enum EFiremode { SemiAuto, FullAuto, Charge, Count }
@@ -52,6 +54,9 @@ public class TankController : MonoBehaviour {
     private float _ChargeFiringTime = 2f;
     private int _MagazineSize = 1;
     private bool _BeenDestroyed = false;
+    private bool _HasShield = false;
+    private bool _ShieldActive = false;
+    private float _ShieldTimer = 0f;
 
     // Stats
     [HideInInspector]
@@ -145,10 +150,27 @@ public class TankController : MonoBehaviour {
             
             // Check for action input
             CheckFire();
-            ChangeFireMode(); /// Debug
+            ActivateShieldCheck();
+            ///ChangeFireMode(); /// temporary for debugging purposes
 
             // Update time alive
             TimeAlive = MatchManager._pInstance._GameTime;
+
+            // Update shield timer
+            if (_ShieldActive) { _ShieldTimer += Time.deltaTime; }
+            if (_ShieldTimer >= MatchManager._pInstance._ShieldTime) {
+
+                _ShieldActive = false;
+                _ShieldTimer = 0f;
+            }
+
+            // Update speed boost timer
+            if (_SpeedModifier > 1f) { _SpeedBoostTimer += Time.deltaTime; }
+            if (_SpeedBoostTimer >= MatchManager._pInstance._SpeedBoostTime) {
+
+                _SpeedModifier = 1f;
+                _SpeedBoostTimer = 0f;
+            }
         }
         else /* (!_Health.CheckAlive()) */ { KillTank(); }
 
@@ -392,13 +414,23 @@ public class TankController : MonoBehaviour {
     private void ChangeFireMode() {
 
         // On button press
-        if (_PreviousGamepadState.Buttons.Y == ButtonState.Released && _GamepadState.Buttons.Y == ButtonState.Pressed) {
+        if (_PreviousGamepadState.Buttons.X == ButtonState.Released && _GamepadState.Buttons.X == ButtonState.Pressed) {
 
             // Change firemode
             _Firemode += 1;
             if (_Firemode == EFiremode.Count) { _Firemode = 0; _MagazineSize = 1; }
 
             if (_Firemode == EFiremode.FullAuto) { _MagazineSize = 20; }
+        }
+    }
+
+    private void ActivateShieldCheck() {
+
+        // Pressed Y button & has shield in inventory
+        if (_PreviousGamepadState.Buttons.Y == ButtonState.Released && _GamepadState.Buttons.Y == ButtonState.Pressed && _HasShield) {
+
+            // Activate shield
+            _ShieldActive = true;
         }
     }
 
@@ -411,10 +443,7 @@ public class TankController : MonoBehaviour {
 
             // Need to create the next tank prior to destroying the current one
             GameObject newTank = Instantiate(gameObject);
-
-            // Destroy mesh of the old tank
-            Destroy(_Cannon.gameObject);
-
+            
             // Update stats
             newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
             newTank.GetComponent<TankController>()._ShellPrefab = GameObject.FindGameObjectWithTag("Shell");
@@ -424,8 +453,20 @@ public class TankController : MonoBehaviour {
             newTank.transform.position = _SpawnPoint.position;
             newTank.transform.rotation = _SpawnPoint.rotation;
 
+            // Add new tank to alive array
+            MatchManager._pInstance._AliveTanks.Add(newTank.GetComponent<TankController>());
+
+            // Destroy mesh of the old tank
+            Destroy(_Cannon.gameObject);
             _BeenDestroyed = true;
         }
     }
 
+    public void SetSpeedModifier(float modifier) { _SpeedModifier = modifier; }
+
+    public void SetHasShield(bool hasShield) { _HasShield = hasShield; }
+
+    public void SetFiremode(EFiremode firemode) { _Firemode = firemode; }
+
+    public bool GetShieldActive() { return _ShieldActive; }
 }
