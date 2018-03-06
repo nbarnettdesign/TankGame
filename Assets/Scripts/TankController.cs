@@ -108,7 +108,8 @@ public class TankController : MonoBehaviour {
         if (_Health.CheckAlive() && !MatchManager._pInstance.GetGamePaused() && !MatchManager._pInstance.GetGameOver()) {
 
             // Update cannon rotation
-             _CannonLook = new Vector3(0, (Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 90);
+            ///_CannonLook = new Vector3((Mathf.Atan2(_GamepadState.ThumbSticks.Right.X, _GamepadState.ThumbSticks.Right.Y) * 180 / Mathf.PI), 0, 0);
+            _CannonLook = new Vector3(_GamepadState.ThumbSticks.Right.X, 0, 0);
             if (_Cannon) _Cannon.transform.Rotate(_CannonLook * _CannonRotationSpeed);
             else { _Cannon = GameObject.FindGameObjectWithTag("TankCannon" + _PlayerIndex.ToString()); }
 
