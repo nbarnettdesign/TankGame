@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Jake'S Main.unity
     guid: ed11fa0cb5f860a488927826fd8c6762
+  - enabled: 1
+    path: Assets/Scene/Game Over.unity
+    guid: 12653547da261bd49b2df5eb313d0afd
