@@ -31,11 +31,15 @@ public class MatchManager : MonoBehaviour {
     public List<TankController> _EliminatedTanks;
     private bool _GameOver = false;
     private bool _GamePaused = false;
+    public Transform[] _SpawnTransforms;
+    public GameObject _NewTank;
+
 
     [HideInInspector]
     public int _GameTime = 0;
     [HideInInspector]
     public static MatchManager _pInstance;
+
 
 
     private void Awake() {
@@ -54,33 +58,13 @@ public class MatchManager : MonoBehaviour {
     private void Start() {
 
         _EliminatedTanks = new List<TankController>();
+        _NewTank.SetActive(false);
     }
 
     private void Update () {
 
         // Update game timer
         _GameTime += (int)Time.deltaTime;
-
-        // Check for eliminated tanks
-        if (_AliveTanks.Count > 1) {
-
-            foreach (var tank in _AliveTanks) {
-
-                // valid memory address
-                if (tank) {
-
-                    // Tank has run out of lives
-                    if (tank.LivesRemaining == 0) {
-
-                        // Remove from alive array
-                        _AliveTanks.Remove(tank);
-
-                        // Send to eliminated array
-                        _EliminatedTanks.Add(tank);
-                    }
-                }
-            }
-        }
 
         // Check for game over
         if (_AliveTanks.Count <= 1) {
@@ -93,4 +77,34 @@ public class MatchManager : MonoBehaviour {
     public bool GetGameOver() { return _GameOver; }
 
     public bool GetGamePaused() { return _GamePaused; }
+
+    public void Restart() {
+
+        // Destroy any excess tanks
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Destroyable");
+
+        foreach (var item in objs) {
+
+            Destroy(item.gameObject);
+        }
+
+        // Make new tanks to play with
+        for (int i = 0; i < 4; ++i) {
+
+            _NewTank.SetActive(true);
+            GameObject obj = Instantiate(_NewTank);
+            TankController tank = obj.GetComponent<TankController>();
+
+            // Set controller index
+            tank._PlayerIndex = (XInputDotNetPure.PlayerIndex)i;
+
+            // Set cannon tag (for controller rotation)
+            tank.transform.GetChild(1).tag = string.Concat("TankCannon" + tank._PlayerIndex.ToString());
+
+            // Set respawn point
+            tank._SpawnPoint = _SpawnTransforms[i];
+            _NewTank.SetActive(false);
+        }
+
+    }
 }

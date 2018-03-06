@@ -269,8 +269,8 @@ public class TankController : MonoBehaviour {
                 // Instantiate shell prefab facing forward based on cannon rotation
                 if (_ShellPrefab && _MuzzleLaunchPoint && _Cannon) {
 
-                    obj = Instantiate(_ShellPrefab, _MuzzleLaunchPoint.transform.position, transform.rotation);
-                    obj.transform.SetPositionAndRotation(_MuzzleLaunchPoint.transform.position, _Cannon.transform.rotation);
+                    obj = Instantiate(_ShellPrefab, _MuzzleLaunchPoint.transform.position, _MuzzleLaunchPoint.transform.rotation);
+                    ///obj.transform.SetPositionAndRotation(_MuzzleLaunchPoint.transform.position, _Cannon.transform.rotation);
 
                     // Set projectile properties
                     Projectile proj;
@@ -279,8 +279,8 @@ public class TankController : MonoBehaviour {
                     proj.SetDamage(MatchManager._pInstance._DamageFullAutoBullet);
 
                     // Set controller rumble properties
-                    rumbleLeft = 0.5f; rumbleRight = 0.5f;
-                    _RumbleTime = 0.25f;
+                    rumbleLeft = 0.7f; rumbleRight = 0.7f;
+                    _RumbleTime = 0.5f;
                 }
                 break;
             }
@@ -291,18 +291,18 @@ public class TankController : MonoBehaviour {
                 // Instantiate bullet prefab facing forward based on cannon rotation
                 if (_BulletPrefab && _MuzzleLaunchPoint && _Cannon) {
 
-                    obj = Instantiate(_BulletPrefab, _MuzzleLaunchPoint.transform.position, transform.rotation);
-                    obj.transform.SetPositionAndRotation(_MuzzleLaunchPoint.transform.position, _Cannon.transform.rotation);
-                    
+                    obj = Instantiate(_BulletPrefab, _MuzzleLaunchPoint.transform.position, _Cannon.transform.rotation);
+
                     // Set projectile properties
                     Projectile proj;
                     proj = obj.GetComponent<Projectile>();
+                
                     proj.SetOwner(this);
                     proj.SetDamage(MatchManager._pInstance._DamageFullAutoBullet);
 
                     // Set controller rumble properties
-                    rumbleLeft = 0.75f; rumbleRight = 0.75f;
-                    _RumbleTime = 0.5f;
+                    rumbleLeft = 0.35f; rumbleRight = 0.35f;
+                    _RumbleTime = 0.25f;
                 }
                 break;
             }
@@ -387,7 +387,6 @@ public class TankController : MonoBehaviour {
 
         // Need to create the next tank prior to destroying the current one
         GameObject newTank = Instantiate(this.gameObject);
-        newTank.transform.position = new Vector3(1000, 1, 1000);
 
         // Update new lives
         newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
@@ -395,9 +394,6 @@ public class TankController : MonoBehaviour {
         // Move tank to spawn point
         newTank.transform.position = _SpawnPoint.position;
         newTank.transform.rotation = _SpawnPoint.rotation;
-
-        // Destroy old tank (current one)
-        Destroy(this.gameObject);
     }
 
 }
