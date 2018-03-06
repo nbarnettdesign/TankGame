@@ -21,6 +21,7 @@ public class TankController : MonoBehaviour {
     private GameObject _Cannon;
     private CharacterController _CharacterController;
     private Health _Health;
+    private GameObject _Shield;
     public GameObject _ShellPrefab;
     public GameObject _BulletPrefab;
     public GameObject _MuzzleLaunchPoint;
@@ -71,6 +72,7 @@ public class TankController : MonoBehaviour {
         // Get component references
         _Cannon = GameObject.FindGameObjectWithTag("TankCannon" + _PlayerIndex.ToString());
         _CharacterController = GetComponent<CharacterController>();
+        _Shield = transform.GetChild(0).gameObject;
         _Health = GetComponent<Health>();
 
         // Set starting health
@@ -171,6 +173,10 @@ public class TankController : MonoBehaviour {
                 _SpeedModifier = 1f;
                 _SpeedBoostTimer = 0f;
             }
+
+            // Update shield display based on activitity
+            if (_ShieldActive) { _Shield.SetActive(true); }
+            else { _Shield.SetActive(false); }
         }
         else /* (!_Health.CheckAlive()) */ { KillTank(); }
 
@@ -421,6 +427,11 @@ public class TankController : MonoBehaviour {
             if (_Firemode == EFiremode.Count) { _Firemode = 0; _MagazineSize = 1; }
 
             if (_Firemode == EFiremode.FullAuto) { _MagazineSize = 20; }
+        }
+
+        if (_PreviousGamepadState.Buttons.B == ButtonState.Released && _GamepadState.Buttons.B == ButtonState.Pressed) {
+
+            _HasShield = true;
         }
     }
 

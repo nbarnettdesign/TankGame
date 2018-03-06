@@ -11,6 +11,9 @@ TagManager:
   - TankCannonFour
   - Shell
   - Bullet
+  - TankCannon
+  - TankBase
+  - Shield
   layers:
   - Default
   - TransparentFX
