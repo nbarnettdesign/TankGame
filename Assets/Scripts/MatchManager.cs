@@ -55,6 +55,9 @@ public class MatchManager : MonoBehaviour {
     [HideInInspector]
     public AsyncOperation Async { get; private set; }
 
+    public GameObject Menu;
+    private bool _hasfinished;
+
     private void Awake() {
 
         // If the singleton has already been initialized
@@ -84,6 +87,12 @@ public class MatchManager : MonoBehaviour {
 
             // Game over
             _GameOver = true;
+        }
+
+        if (_GameOver && !_hasfinished) {
+
+            _hasfinished = true;
+            Menu.SetActive(true);
         }
 	}
     
@@ -127,5 +136,12 @@ public class MatchManager : MonoBehaviour {
 
             plyr.Lives = _PlayerLives;
         }*/
+    }
+
+    public void Mainmenu() {
+
+        Async = SceneManager.LoadSceneAsync(0);
+        Async.allowSceneActivation = true;
+
     }
 }
