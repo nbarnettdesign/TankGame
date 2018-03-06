@@ -143,6 +143,7 @@ public class CameraController : MonoBehaviour
         averageY = sumY / players.Count;
 
         Vector3 offset = new Vector3(averageX, 0, averageY);
+
         if (!canSeeAllPlayers)
         {
             if(offset.magnitude < depthMax && lastDirectionMoved != CamerDirection.Forward)
