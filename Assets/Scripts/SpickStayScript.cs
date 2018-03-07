@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpickStayScript : MonoBehaviour
 
-    // Created by ellen
+    // Created by liam
 {
     public float SpickDamage = 0.1f;
     public ParticleSystem _ImpactEffect;
