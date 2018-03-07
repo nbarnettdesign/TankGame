@@ -94,6 +94,13 @@ public class MatchManager : MonoBehaviour {
             _hasfinished = true;
             Menu.SetActive(true);
         }
+
+        int i = 1;
+        foreach (Player item in _Players) {
+
+            Debug.Log("Player " + i + " - " +item.Lives);
+            ++i;
+        }
 	}
     
     public bool GetGameOver() { return _GameOver; }

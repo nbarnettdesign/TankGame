@@ -462,22 +462,28 @@ public class TankController : MonoBehaviour {
 
             // Remove life from life count
             LivesRemaining -= 1;
-            ///MatchManager._pInstance._Players[(int)_PlayerIndex].Lives = LivesRemaining;
+            MatchManager._pInstance._Players[(int)_PlayerIndex].Lives = LivesRemaining;
 
-            // Need to create the next tank prior to destroying the current one
-            GameObject newTank = Instantiate(gameObject);
-            
-            // Update stats
-            newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
-            newTank.GetComponent<TankController>()._ShellPrefab = GameObject.FindGameObjectWithTag("Shell");
-            newTank.GetComponent<TankController>()._BulletPrefab = GameObject.FindGameObjectWithTag("Bullet");
+            if (MatchManager._pInstance._Players[(int)_PlayerIndex].Lives > 0) {
 
-            // Move tank to spawn point
-            newTank.transform.position = _SpawnPoint.position;
-            newTank.transform.rotation = _SpawnPoint.rotation;
+                // Need to create the next tank prior to destroying the current one
+                GameObject newTank = Instantiate(gameObject);
 
-            // Add new tank to alive array
-            MatchManager._pInstance._AliveTanks.Add(newTank.GetComponent<TankController>());
+                // Update stats
+                newTank.GetComponent<TankController>().LivesRemaining = LivesRemaining;
+                newTank.GetComponent<TankController>()._ShellPrefab = GameObject.FindGameObjectWithTag("Shell");
+                newTank.GetComponent<TankController>()._BulletPrefab = GameObject.FindGameObjectWithTag("Bullet");
+
+                // Move tank to spawn point
+                newTank.transform.position = _SpawnPoint.position;
+                newTank.transform.rotation = _SpawnPoint.rotation;
+
+                // Add new tank to alive array
+                MatchManager._pInstance._AliveTanks.Add(newTank.GetComponent<TankController>());
+            }
+
+            // Remove old tank from alive array
+            MatchManager._pInstance._AliveTanks.Remove(this);
 
             // Destroy mesh of the old tank
             Destroy(_Cannon.gameObject);
