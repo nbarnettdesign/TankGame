@@ -62,12 +62,12 @@ public class Projectile : MonoBehaviour {
             }
 
             else if (collision.gameObject.tag == "Shield") {
-                
+
                 // Play impact effect
                 if (_ImpactEffect) { Instantiate(_ImpactEffect, transform).Play(); }
 
                 if (_ExplosiveProjectile) {
-                    
+
                     Bounds exp = new Bounds(transform.position, new Vector3(_ExplosionSphereRadius, _ExplosionSphereRadius));
 
                     if (collision.gameObject.tag == "Destroyable") {
@@ -79,7 +79,7 @@ public class Projectile : MonoBehaviour {
 
                             // Not colliding with owner & the tank has no active shield currently
                             if (tank != _Owner && !tank.GetShieldActive()) {
-                                
+
                                 // Get reference to the damagable component
                                 Health obj = collision.gameObject.GetComponent<Health>();
 
@@ -90,70 +90,69 @@ public class Projectile : MonoBehaviour {
                 }
                 Destroy(gameObject);
             }
-        }
-
-        // Check for valid damagable object
-        if (collision.gameObject.tag == "Destroyable") {
             
+            // Check for valid damagable object
+            if (collision.gameObject.tag == "Destroyable") {
 
-            // If not our owner that the projectile is colliding against
-            TankController tank = collision.gameObject.GetComponent<TankController>();
-            if (tank != _Owner) {
-                
-                if (!tank.GetShieldActive()) {
+                // If not our owner that the projectile is colliding against
+                TankController tank = collision.gameObject.GetComponent<TankController>();
+                if (tank != _Owner) {
 
-                    // Get reference to the damagable component
-                    Health obj = collision.gameObject.GetComponent<Health>();
-                    obj.Damage(_Damage);
+                    if (!tank.GetShieldActive()) {
+
+                        // Get reference to the damagable component
+                        Health obj = collision.gameObject.GetComponent<Health>();
+                        obj.Damage(_Damage);
+
+                        // Play impact effect
+                        if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
+                        Destroy(gameObject);
+                    }
+                }
+            }
+
+            // Check for collision against walls
+            if (collision.gameObject.tag == "Wall") {
+
+                // Bounces
+                if (_Reflects && _BounceCount > 0) {
+
+                    // Reflect velocity based off contact point
+                    ContactPoint contact = collision.contacts[0];
+                    _Velocity = Vector3.Reflect(_Velocity, contact.normal);
+
+                    _BounceCount -= 1;
+                }
+
+                // Doesnt bounce
+                else {
 
                     // Play impact effect
                     if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
-                    Destroy(gameObject);
-                }               
-            }
-        }
+                    /*
+                    if (_ExplosiveProjectile) {
 
-        // Check for collision against walls
-        if (collision.gameObject.tag == "Wall") {
+                        Bounds exp = new Bounds(transform.position, new Vector3(_ExplosionSphereRadius, _ExplosionSphereRadius));
 
-            // Bounces
-            if (_Reflects && _BounceCount > 0) {
+                        if (collision.gameObject.tag == "Destroyable") {
 
-                // Reflect velocity based off contact point
-                ContactPoint contact = collision.contacts[0];                
-                _Velocity = Vector3.Reflect(_Velocity, contact.normal);
+                            if (exp.Intersects(collision.gameObject.GetComponent<Collider>().GetComponent<Bounds>())) {
 
-                _BounceCount -= 1;
-            }
+                                // If not our owner that the projectile is colliding against
+                                TankController tank3 = collision.gameObject.GetComponent<TankController>();
 
-            // Doesnt bounce
-            else {
+                                // Not colliding with owner & the tank has no active shield currently
+                                if (tank3 != _Owner && !tank3.GetShieldActive()) {
 
-                // Play impact effect
-                if (_ImpactEffect) { Instantiate(_ImpactEffect, collision.transform).Play(); }
-                /*
-                if (_ExplosiveProjectile) {
-
-                    Bounds exp = new Bounds(transform.position, new Vector3(_ExplosionSphereRadius, _ExplosionSphereRadius));
-
-                    if (collision.gameObject.tag == "Destroyable") {
-
-                        if (exp.Intersects(collision.gameObject.GetComponent<Collider>().GetComponent<Bounds>())) {
-
-                            // If not our owner that the projectile is colliding against
-                            TankController tank3 = collision.gameObject.GetComponent<TankController>();
-
-                            // Not colliding with owner & the tank has no active shield currently
-                            if (tank3 != _Owner && !tank3.GetShieldActive()) {
-
-                                // Get reference to the damagable component
-                                Health obj3 = collision.gameObject.GetComponent<Health>();
-                                obj3.Damage(_Damage);
+                                    // Get reference to the damagable component
+                                    Health obj3 = collision.gameObject.GetComponent<Health>();
+                                    obj3.Damage(_Damage);
+                                }
                             }
                         }
-                    }
-                }*/
-                Destroy(gameObject);
+                    }*/
+                    Destroy(gameObject);
+                }
             }
         }
     }

@@ -452,6 +452,7 @@ public class TankController : MonoBehaviour {
 
             // Activate shield
             _ShieldActive = true;
+            _HasShield = false;
         }
     }
 
