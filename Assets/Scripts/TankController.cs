@@ -191,6 +191,13 @@ public class TankController : MonoBehaviour {
             // Stop rumble once its reached timer threshold
             if (_TimerRumble >= _RumbleTime) { ControllerRumble(false, 0f, 0f); }
         }
+
+        // placeholder code for game over screen
+        if (_PreviousGamepadState.Buttons.Start == ButtonState.Released && _GamepadState.Buttons.Start == ButtonState.Pressed)
+        {
+
+            MatchManager._pInstance.SetGameOver(true);
+        }
     }
 
     private void UpdateDefaults() {

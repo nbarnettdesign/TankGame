@@ -153,4 +153,6 @@ public class MatchManager : MonoBehaviour {
         Async.allowSceneActivation = true;
 
     }
+
+    public void SetGameOver(bool value) { _GameOver = value; }
 }
