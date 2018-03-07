@@ -83,7 +83,16 @@ public class MatchManager : MonoBehaviour {
         _GameTime += (int)Time.deltaTime;
 
         // Check for game over
-        if (_AliveTanks.Count <= 1) {
+        int playersEliminated = 0;
+        foreach (Player item in _Players) {
+
+            if (item.Lives <= 0) {
+
+                playersEliminated += 1;
+            }
+        }
+
+        if (playersEliminated >= 3) {
 
             // Game over
             _GameOver = true;
@@ -93,13 +102,6 @@ public class MatchManager : MonoBehaviour {
 
             _hasfinished = true;
             Menu.SetActive(true);
-        }
-
-        int i = 1;
-        foreach (Player item in _Players) {
-
-            Debug.Log("Player " + i + " - " +item.Lives);
-            ++i;
         }
 	}
     
